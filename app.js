@@ -1,15 +1,5 @@
 "use strict"
 
-// Rock crushes Scissors
-// Scissors cuts Paper
-// Paper covers Rock
-// Rock crushes Lizard
-// Lizard poisons Spock
-// Spock smashes Scissors
-// Scissors decapitates Lizard
-// Lizard eats Paper
-// Paper disproves Spock
-// Spock vaporizes Rock
 
 //human vs human, human vs computer
 //best of three for winner
@@ -18,34 +8,41 @@ class Game{
     constructor(){
         this.playerOne = new Player("Harry");
         this.playerTwo = new Player("Ron");
-
     }
 
     runGame(){
         this.displayRules();
-
-
-        this.playerOne.pickGesture();
-        this.playerTwo.pickGesture();
-        let result = this.playerOne.picked.compareGestures(this.playerTwo.picked);
-        if(result == 1){
-            this.playerOne.score ++;
-            console.log("Player one won");
-        }else if(result == -1){
-            this.playerTwo.score ++;
-            console.log("Player two won");
-        }else{
-            console.log("there is a tie");
+        let playType = prompt("Do you want to play (1)singleplayer or (2)multiplayer?");
+        while(this.playerOne.score < 2 && this.playerTwo.score < 2){
+            this.playerOne.pickGesture();
+            this.playerTwo.pickGesture();
+            let result = this.playerOne.picked.compareGestures(this.playerTwo.picked);
+            if(result == 1){
+                this.playerOne.score ++;
+                console.log("Player one won this round");
+            }else if(result == -1){
+                this.playerTwo.score ++;
+                console.log("Player two won this round");
+            }else{
+                console.log("there is a tie");
+            }
         }
-        //let winner = 
-
-        // while(this.playerOne.score < 3 && this.playerTwo.score < 3){
-        // }
+        this.displayGameWinner();
     }
 
     displayRules(){
         console.log("Welcome to RPSLS");
+        console.log("Here are the rules:")
         console.log("Rock crushes Scissors, Scissors cuts Paper, Paper covers Rock, Rock crushes Lizard, Lizard poisons Spock, Spock smashes Scissors, Scissors decapitates Lizard, Lizard eats Paper, Paper disproves Spock, Spock vaporizes Rock")
+
+    }
+
+    displayGameWinner(){
+        if(this.playerOne.score>this.playerTwo.score){
+            console.log("Player One won!");
+        }else{
+            console.log("Player Two won")
+        }
     }
     
 }
@@ -59,6 +56,11 @@ class Player{
         this.gestures = [new Rock, new Paper, new Scissors, new Lizard, new Spock];
         this.picked = "";
     }
+
+    
+}
+
+class Computer extends Player{
 
     pickGesture(){
         let chosenGesture = this.gestures[this.generateRandomNumber()];
