@@ -69,7 +69,10 @@ class Player{
     pickGesture(){
         let chosenGesture = prompt("Choose 'rock', 'paper',' scissors', 'lizard', or 'spock'");
         chosenGesture = chosenGesture.charAt(0).toUpperCase() + chosenGesture.slice(1).toLowerCase();
-        this.picked = chosenGesture;
+        let matchedIndex = this.gestures.map(function(obj) { 
+            return obj.name; 
+        }).indexOf(chosenGesture);
+        this.picked = this.gestures[matchedIndex];
     }
 }
 
