@@ -8,20 +8,29 @@ class Game{
     constructor(){
         this.playerOne = new Player("Harry");
         this.playerTwo = new Player("Ron");
+        this.playerComp = new Computer();
     }
 
     runGame(){
         this.displayRules();
         let playType = prompt("Do you want to play (1)singleplayer or (2)multiplayer?");
-        while(this.playerOne.score < 2 && this.playerTwo.score < 2){
-            this.playerOne.pickGesture();
-            this.playerTwo.pickGesture();
-            let result = this.playerOne.picked.compareGestures(this.playerTwo.picked);
+        let first = this.playerOne;
+        let second;
+        if(playType == 1){
+            second = this.playerComp;
+        }else if(playType == 2){
+            second = this.playerTwo;
+        }
+        
+        while(first.score < 2 && second.score < 2){
+            first.pickGesture();
+            second.pickRandomGesture();
+            let result = first.picked.compareGestures(second.picked);
             if(result == 1){
-                this.playerOne.score ++;
+                first.score ++;
                 console.log("Player one won this round");
             }else if(result == -1){
-                this.playerTwo.score ++;
+                second.score ++;
                 console.log("Player two won this round");
             }else{
                 console.log("there is a tie");
@@ -57,12 +66,20 @@ class Player{
         this.picked = "";
     }
 
-    
+    pickGesture(){
+        let chosenGesture = prompt("Choose 'rock', 'paper',' scissors', 'lizard', or 'spock'");
+        chosenGesture = chosenGesture.charAt(0).toUpperCase() + chosenGesture.slice(1).toLowerCase();
+        this.picked = chosenGesture;
+    }
 }
 
 class Computer extends Player{
+    constructor(){
+        super();
+        this.name = "Computer";
+    }
 
-    pickGesture(){
+    pickRandomGesture(){
         let chosenGesture = this.gestures[this.generateRandomNumber()];
         this.picked = chosenGesture;
     }
