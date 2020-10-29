@@ -12,14 +12,20 @@ class Game{
     }
 
     gameSetup(){
-        let playType = prompt("Do you want to play (1)singleplayer or (2)multiplayer?");
-        switch (playType) {
-            case "1":
+        let intType = 0;
+        let chosenType;
+        do{
+            chosenType = prompt("Do you want to play (1)singleplayer or (2)multiplayer?").trim();
+            intType = parseInt(chosenType);
+        }while(intType < 1 || intType > 2 || isNaN(intType));
+
+        switch (intType) {
+            case 1:
                 this.playerOne = new Human();
                 this.playerOne.pickName();
                 this.playerTwo = new Computer();
                 break;
-            case "2":
+            case 2:
                 this.playerOne = new Human();
                 this.playerOne.pickName();
                 this.playerTwo = new Human();
@@ -92,17 +98,22 @@ class Human extends Player{
     }
 
     pickName(){
-        let nameChoice = prompt("What is your name?");
+        let nameChoice = "";
+        while(nameChoice = "");{
+            nameChoice = prompt("What is your name?");
+        } 
         this.name = nameChoice;
     }
 
     pickGesture(){
-        let chosenGesture = prompt("Choose 'rock', 'paper',' scissors', 'lizard', or 'spock'");
-        chosenGesture = chosenGesture.charAt(0).toUpperCase() + chosenGesture.slice(1).toLowerCase();
-        let matchedIndex = this.gestures.map(function(obj) { 
-            return obj.name; 
-        }).indexOf(chosenGesture);
-        this.picked = this.gestures[matchedIndex];
+        let intGesture = 0;
+        let chosenGesture;
+        do{
+            chosenGesture = prompt("Choose (1)rock, (2)paper, (3)scissors, (4)lizard, or (5)Spock").trim();
+            intGesture = parseInt(chosenGesture);
+        }while(intGesture < 1 || intGesture > 5 || isNaN(intGesture));
+        
+        this.picked = this.gestures[chosenGesture - 1];
     }
 }
 
