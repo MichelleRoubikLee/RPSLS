@@ -19,17 +19,20 @@ class Game{
         this.playerOne = new Player("Harry");
         this.playerTwo = new Player("Ron");
 
-        this.gestrues = [];
+        
 
-        this.gestures.push("Rock");
-        this.gestures.push("Paper");
-        this.gestures.push("Scissors");
-        this.gestures.push("Lizard");
-        this.gestures.push("Spock");
     }
 
     runGame(){
         this.displayRules();
+
+        this.playerOne.pickGesture();
+        let playerOneGesture = this.playerOne.pickGesture();
+        let playerTwoGesture = this.playerTwo.pickGesture();
+
+
+        // while(this.playerOne.score < 3 && this.playerTwo.score < 3){
+        // }
     }
 
     displayRules(){
@@ -43,15 +46,37 @@ class Player{
     constructor(name){
         this.name = name;
         this.score = 0;
+
+        this.gestrues = [new Rock,"Paper","Scissors","Lizard","Spock"];
     }
 
     pickGesture(){
-
+        let chosenGesture = this.gestures[this.generateRandomNumber()];
+        return chosenGesture;
     }
 
     generateRandomNumber(){
         let randomNumber = Math.floor(Math.random() * 5) + 1;
         return randomNumber;
+    }
+}
+
+class Gesture{
+    constructor(){
+        this.name = "";
+    }
+
+    //child classes methods for winning and loosing
+
+
+}
+
+class Rock extends Gesture{
+    constructor(){
+        super();
+        this.name = "Rock";
+        //winning array
+        //loosing array
     }
 }
 
