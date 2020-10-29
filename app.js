@@ -6,32 +6,47 @@
 
 class Game{
     constructor(){
-        this.playerOne = new Player("Harry");
-        this.playerTwo = new Player("Ron");
-        this.playerComp = new Computer();
+        this.playerOne = null;
+        this.playerTwo = null;
+        this.finalScore = 0;
+    }
+
+    gameSetup(){
+        let playType = prompt("Do you want to play (1)singleplayer or (2)multiplayer?");
+        switch (playType) {
+            case "1":
+                this.playerOne = new Human();
+                this.playerOne.pickName();
+                this.playerTwo = new Computer();
+                break;
+            case "2":
+                this.playerOne = new Human();
+                this.playerOne.pickName();
+                this.playerTwo = new Human();
+                this.playerTwo.pickName();
+                break;
+            default:
+                this.gameSetup();
+                break;
+        }
+        let playTo = prompt("How many points to win");
+        this.finalScore = parseInt(playTo);
     }
 
     runGame(){
         this.displayRules();
-        let playType = prompt("Do you want to play (1)singleplayer or (2)multiplayer?");
-        let first = this.playerOne;
-        let second;
-        if(playType == 1){
-            second = this.playerComp;
-        }else if(playType == 2){
-            second = this.playerTwo;
-        }
+        this.gameSetup();
         
-        while(first.score < 2 && second.score < 2){
-            first.pickGesture();
-            second.pickRandomGesture();
-            let result = first.picked.compareGestures(second.picked);
+        while(this.playerOne.score < this.finalScore && this.playerTwo.score < this.finalScore){
+            this.playerOne.pickGesture();
+            this.playerTwo.pickGesture();
+            let result = this.playerOne.picked.compareGestures(this.playerTwo.picked);
             if(result == 1){
-                first.score ++;
-                console.log("Player one won this round");
+                this.playerOne.score ++;
+                console.log(this.playerOne.name +" won this round with " + this.playerOne.picked.name + ' vs. ' + this.playerTwo.picked.name);
             }else if(result == -1){
-                second.score ++;
-                console.log("Player two won this round");
+                this.playerTwo.score ++;
+                console.log(this.playerTwo.name +" won this round with " + this.playerTwo.picked.name + ' vs. ' + this.playerOne.picked.name);
             }else{
                 console.log("there is a tie");
             }
@@ -48,9 +63,9 @@ class Game{
 
     displayGameWinner(){
         if(this.playerOne.score>this.playerTwo.score){
-            console.log("Player One won!");
+            console.log(this.playerOne.name + " won!");
         }else{
-            console.log("Player Two won")
+            console.log(this.playerTwo.name + " won")
         }
     }
     
@@ -58,12 +73,27 @@ class Game{
 
 
 class Player{
-    constructor(name){
-        this.name = name;
+    constructor(){
+        this.name = "";
         this.score = 0;
 
         this.gestures = [new Rock, new Paper, new Scissors, new Lizard, new Spock];
         this.picked = "";
+    }
+    pickGesture(){
+        console.log("Override this method");
+    }
+    
+}
+
+class Human extends Player{
+    constructor(){
+        super();
+    }
+
+    pickName(){
+        let nameChoice = prompt("What is your name?");
+        this.name = nameChoice;
     }
 
     pickGesture(){
@@ -82,7 +112,7 @@ class Computer extends Player{
         this.name = "Computer";
     }
 
-    pickRandomGesture(){
+    pickGesture(){
         let chosenGesture = this.gestures[this.generateRandomNumber()];
         this.picked = chosenGesture;
     }
