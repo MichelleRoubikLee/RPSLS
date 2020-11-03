@@ -7,24 +7,35 @@
 </head>
 <body>
     <h1>Welcome to RPSLS</h1>
+
     <button onclick="game.runGame()">Start Playing</button>
-    <form>
+
+    <form onsubmit="game.gamePlayers()">
         <input type="radio" id="singlePlayer" name="playType" value="singlePlayer">
         <label for="singlePlayer">Single Player</label>
         <input type="radio" id="multiPlayer" name="playType" value="multiPlayer">
         <label for="multiPlayer">Multi-Player</label><br>
-        <input type="button" id="playTypeBtn" value="Enter Play Type">
+        <button type="submit" value="Submit">Submit</button>
     </form>
+
+    <h4>How many points to win?</h4>
+    <form onsubmit="game.gameScore()">
+        <label for="pointsToWin">Enter 1-10:</label>
+        <input type="text" id="pointsToWin">
+        <button type="submit" value="Submit">Submit</button>
+    </form>
+
     <h4>Choose Your Name:</h4>
-    <form>
+    <form id="playerNames">
         <label for="playerOneName">Player One Name:</label>
         <input type="text" id="playerOneName" name="name"><br>
         <label for="playerTwoName">Player Two Name:</label>
         <input type="text" id="playerTwoName" name="name"><br>
         <input type="button" id="name" value="Enter Player Name">
     </form>
+    
     <h4>Pick a Gesture:</h4>
-    <form>
+    <form id="radioGesture">
         <input type="radio" id="rock" name="gestrue" value="rock">
         <label for="rock">Rock</label><br>
         <input type="radio" id="paper" name="gestrue" value="paper">

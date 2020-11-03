@@ -18,40 +18,40 @@ class Game{
     }
 
     gamePlayers(){
-        let intType = 0;
-        let chosenType;
-        do{
-            chosenType = prompt("Do you want to play (1)singleplayer or (2)multiplayer?").trim();
-            intType = parseInt(chosenType);
-        }while(intType < 1 || intType > 2 || isNaN(intType));
+        let chosenType = document.querySelector('input[name="playType"]:checked').value;
+        // do{
+        //     chosenType = prompt("Do you want to play (1)singleplayer or (2)multiplayer?").trim();
+        //     intType = parseInt(chosenType);
+        // }while(intType < 1 || intType > 2 || isNaN(intType));
 
-        switch (intType) {
-            case 1:
+        switch (chosenType) {
+            case "singlePlayer":
                 this.playerOne = new Human();
                 this.playerOne.pickName();
                 this.playerTwo = new Computer();
                 break;
-            case 2:
+            case "multiPlayer":
                 this.playerOne = new Human();
                 this.playerOne.pickName();
                 this.playerTwo = new Human();
                 this.playerTwo.pickName();
                 break;
             default:
+                alert("select either single or multi player");
                 this.gamePlayers();
                 break;
         }        
     }
 
     gameScore(){
-        let playTo = prompt("How many points to win");
+        let playTo = document.querySelector('input[id="pointsToWin"]').value;
         this.finalScore = parseInt(playTo);
     }
 
     runGame(){
         this.displayRules();
-        this.gamePlayers();
-        this.gameScore();
+        //this.gamePlayers();
+        //this.gameScore();
         
         while(this.playerOne.score < this.finalScore && this.playerTwo.score < this.finalScore){
             this.playerOne.pickGesture();
