@@ -7,9 +7,20 @@
 </head>
 <body>
     <h1>Welcome to RPSLS</h1>
+    <h3>Here is what you need to know: </h3>
+        <h5><br>Rock crushes Scissors, <br>Scissors cuts Paper, 
+        <br>Paper covers Rock, 
+        <br>Rock crushes Lizard, 
+        <br>Lizard poisons Spock, 
+        <br>Spock smashes Scissors, 
+        <br>Scissors decapitates Lizard, 
+        <br>Lizard eats Paper, 
+        <br>Paper disproves Spock, 
+        <br>Spock vaporizes Rock</h5>
 
     <button onclick="game.runGame()">Start Playing</button>
-
+    
+    <h3>How would you like to play?</h3>
     <form onsubmit="game.gamePlayers()">
         <input type="radio" id="singlePlayer" name="playType" value="singlePlayer">
         <label for="singlePlayer">Single Player</label>
@@ -25,17 +36,10 @@
         <button type="submit" value="Submit">Submit</button>
     </form>
 
-    <h4>Choose Your Name:</h4>
-    <form id="playerNames">
-        <label for="playerOneName">Player One Name:</label>
-        <input type="text" id="playerOneName" name="name"><br>
-        <label for="playerTwoName">Player Two Name:</label>
-        <input type="text" id="playerTwoName" name="name"><br>
-        <input type="button" id="name" value="Enter Player Name">
-    </form>
     
+
     <h4>Pick a Gesture:</h4>
-    <form id="radioGesture">
+    <form onsubmit="game.runGame()">
         <input type="radio" id="rock" name="gestrue" value="rock">
         <label for="rock">Rock</label><br>
         <input type="radio" id="paper" name="gestrue" value="paper">
@@ -46,6 +50,7 @@
         <label for="lizard">Lizard</label><br>
         <input type="radio" id="Spock" name="gestrue" value="spock">
         <label for="spock">Spock</label><br>
+        <button type="submit" value="Submit">Submit</button>
     </form>
     <script type="text/javascript" src="app.js"></script>
 </body>

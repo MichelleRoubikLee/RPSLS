@@ -11,14 +11,10 @@ class Game{
         this.finalScore = 0;
     }
 
-    displayRules(){
-        console.log("Welcome to RPSLS");
-        console.log("Here are the rules:")
-        console.log("Rock crushes Scissors, Scissors cuts Paper, Paper covers Rock, Rock crushes Lizard, Lizard poisons Spock, Spock smashes Scissors, Scissors decapitates Lizard, Lizard eats Paper, Paper disproves Spock, Spock vaporizes Rock")
-    }
-
     gamePlayers(){
         let chosenType = document.querySelector('input[name="playType"]:checked').value;
+        //add no input validation
+
         // do{
         //     chosenType = prompt("Do you want to play (1)singleplayer or (2)multiplayer?").trim();
         //     intType = parseInt(chosenType);
@@ -45,11 +41,11 @@ class Game{
 
     gameScore(){
         let playTo = document.querySelector('input[id="pointsToWin"]').value;
+        //add int validation
         this.finalScore = parseInt(playTo);
     }
 
     runGame(){
-        this.displayRules();
         //this.gamePlayers();
         //this.gameScore();
         
@@ -71,8 +67,6 @@ class Game{
         }
         this.displayGameWinner();
     }
-
-    
 
     displayGameWinner(){
         if(this.playerOne.score>this.playerTwo.score){
@@ -113,14 +107,9 @@ class Human extends Player{
     }
 
     pickGesture(){
-        let intGesture = 0;
-        let chosenGesture;
-        do{
-            chosenGesture = prompt("Choose (1)rock, (2)paper, (3)scissors, (4)lizard, or (5)Spock").trim();
-            intGesture = parseInt(chosenGesture);
-        }while(intGesture < 1 || intGesture > 5 || isNaN(intGesture));
+        let chosenGesture = document.querySelector('input[name="gesture"]:checked').value;
         
-        this.picked = this.gestures[chosenGesture - 1];
+        this.picked = this.gestures[chosenGesture];
     }
 }
 
