@@ -11,7 +11,13 @@ class Game{
         this.finalScore = 0;
     }
 
-    gameSetup(){
+    displayRules(){
+        console.log("Welcome to RPSLS");
+        console.log("Here are the rules:")
+        console.log("Rock crushes Scissors, Scissors cuts Paper, Paper covers Rock, Rock crushes Lizard, Lizard poisons Spock, Spock smashes Scissors, Scissors decapitates Lizard, Lizard eats Paper, Paper disproves Spock, Spock vaporizes Rock")
+    }
+
+    gamePlayers(){
         let intType = 0;
         let chosenType;
         do{
@@ -32,20 +38,26 @@ class Game{
                 this.playerTwo.pickName();
                 break;
             default:
-                this.gameSetup();
+                this.gamePlayers();
                 break;
-        }
+        }        
+    }
+
+    gameScore(){
         let playTo = prompt("How many points to win");
         this.finalScore = parseInt(playTo);
     }
 
     runGame(){
         this.displayRules();
-        this.gameSetup();
+        this.gamePlayers();
+        this.gameScore();
         
         while(this.playerOne.score < this.finalScore && this.playerTwo.score < this.finalScore){
             this.playerOne.pickGesture();
             this.playerTwo.pickGesture();
+
+            //add new method
             let result = this.playerOne.picked.compareGestures(this.playerTwo.picked);
             if(result == 1){
                 this.playerOne.score ++;
@@ -60,12 +72,7 @@ class Game{
         this.displayGameWinner();
     }
 
-    displayRules(){
-        console.log("Welcome to RPSLS");
-        console.log("Here are the rules:")
-        console.log("Rock crushes Scissors, Scissors cuts Paper, Paper covers Rock, Rock crushes Lizard, Lizard poisons Spock, Spock smashes Scissors, Scissors decapitates Lizard, Lizard eats Paper, Paper disproves Spock, Spock vaporizes Rock")
-
-    }
+    
 
     displayGameWinner(){
         if(this.playerOne.score>this.playerTwo.score){
@@ -201,4 +208,6 @@ class Spock extends Gesture{
 }
 
 let game = new Game();
-game.runGame();
+
+//start button on index.html
+//game.runGame();
