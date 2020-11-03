@@ -8,11 +8,34 @@
 <body>
     <h1>Welcome to RPSLS</h1>
     <button onclick="game.runGame()">Start Playing</button>
-    <!-- <form>
-        <input type="radio" name="playType" value="singlePlayer">
-        <input type="radio" name="playType" value="multiPlayer">
-        <input type="button" id="playTypeBtn" value="show selected value">
-    </form> -->
+    <form>
+        <input type="radio" id="singlePlayer" name="playType" value="singlePlayer">
+        <label for="singlePlayer">Single Player</label>
+        <input type="radio" id="multiPlayer" name="playType" value="multiPlayer">
+        <label for="multiPlayer">Multi-Player</label><br>
+        <input type="button" id="playTypeBtn" value="Enter Play Type">
+    </form>
+    <h4>Choose Your Name:</h4>
+    <form>
+        <label for="playerOneName">Player One Name:</label>
+        <input type="text" id="playerOneName" name="name"><br>
+        <label for="playerTwoName">Player Two Name:</label>
+        <input type="text" id="playerTwoName" name="name"><br>
+        <input type="button" id="name" value="Enter Player Name">
+    </form>
+    <h4>Pick a Gesture:</h4>
+    <form>
+        <input type="radio" id="rock" name="gestrue" value="rock">
+        <label for="rock">Rock</label><br>
+        <input type="radio" id="paper" name="gestrue" value="paper">
+        <label for="paper">Paper</label><br>
+        <input type="radio" id="scissors" name="gestrue" value="scissors">
+        <label for="scissors">Scissors</label><br>
+        <input type="radio" id="Lizard" name="gestrue" value="lizard">
+        <label for="lizard">Lizard</label><br>
+        <input type="radio" id="Spock" name="gestrue" value="spock">
+        <label for="spock">Spock</label><br>
+    </form>
     <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
